@@ -4,14 +4,18 @@ import java.io.*;
 /**
  * BOJ 13023 ABCDE
  * 2021.03.03
- * : dfs --> 시간 초과
+ * : 1. dfs & 방문한 사람 (linkedlist) & person의 친구 (linkedlist) --> 시간 초과
+ * : 2. dfs & 방문한 사람 (배열) --> 시간 초과
+ * : 3. dfs & 방문한 사람(linkedlist) & dfs 돌리는 것을 2차원 배열 --> 더욱더 시간초과
+ * : 4. dfs & 방문한 사람(배열) & person의 친구 (ArrayList) --> 통과
+ * --> ArrayList와 LinkedList는 add 에서는 속도 차이가 거의 없지만
+ * !!!!!!!!!!개중요!!!!!!!! get에서는 ArrayList가 훨씬 더 빠른 속도를 가짐!
  * @author 0JUUU
  *
  */
 public class Main_BOJ_13023_ABCDE {
 	static int N, M, count;
 	static boolean isRight = false;
-	static LinkedList<Integer> list = new LinkedList<Integer>();
 	static int[] visited;
 	static People[] people;
 	public static void main(String[] args) throws Exception {
@@ -38,9 +42,12 @@ public class Main_BOJ_13023_ABCDE {
 		else {
 			for(int i = 0; i<N;i++) {
 				int relation = 0;
-				list.clear();
-				list.addLast(i);
+				
+//				list.clear();
+//				list.addLast(i);
+				visited[i] = 1;
 				dfs(i, relation);
+				visited[i] = 0;
 				if(isRight) break;
 			}
 		}
@@ -59,9 +66,11 @@ public class Main_BOJ_13023_ABCDE {
 		for(int i = 0; i<people[start].friends.size();i++) {
 			next = people[start].friends.get(i);
 			
-			if(list.contains(next)) continue;
-			list.addLast(next);
+			if(visited[next] != 0) continue;
+			visited[next] = 1;
 			dfs(next, relation + 1);
+			if(isRight) break;
+			visited[next] = 0;
 		}
 		
 		if(isRight) return;
@@ -71,10 +80,10 @@ public class Main_BOJ_13023_ABCDE {
 
 class People {
 	int num;
-	LinkedList<Integer> friends;
+	ArrayList<Integer> friends;
 	
 	public People() {
 		super();
-		friends = new LinkedList<>();
+		friends = new ArrayList<>();
 	}
 }
