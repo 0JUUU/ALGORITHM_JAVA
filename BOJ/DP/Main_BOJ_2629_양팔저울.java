@@ -1,6 +1,15 @@
 import java.util.*;	// util 패키지의 모든 것 import
 import java.io.*;	// io 패키지의 모든 것 import	
 
+
+/**
+ * BOJ 2629 양팔저울
+ * 2021.03.29
+ * : ArrayList를 이용하여 풀었음 --> DP의 배낭문제와 비슷한 느낌으로 접근
+ * @author 0JUUU
+ *
+ */
+
 public class Main_BOJ_2629_양팔저울 { 
 	public static void main(String[] args) throws Exception {	// main 시작
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));	// 입력받기 위해 해당 라인 작성
