@@ -4,6 +4,7 @@ import java.io.*;
 /**
  * BOJ 1283 단축키 지정
  * 2021.05.06
+ * 하나하나 다 해봄 
  * @author 0JUUU
  *
  */
